@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PickDishActivity" />
+        <activity android:name=".TableActivity" />
+        <activity android:name=".DishActivity" />
+        <activity android:name=".TimeNameActivity" />
+        <activity android:name=".ViewReservationsActivity"></activity>
     </application>
 
 </manifest>
