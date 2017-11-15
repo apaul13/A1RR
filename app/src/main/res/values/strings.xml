@@ -14,4 +14,5 @@
     <string name="name">Name:</string>
     <string name="time">Time:</string>
     <string name="choose_name_time">Enter Name and Time</string>
+    <string name="confirmation">Confirm Reservation</string>
 </resources>
