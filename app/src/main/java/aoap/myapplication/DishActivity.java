@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 public class DishActivity extends AppCompatActivity {
 
     private double total;
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,32 +37,46 @@ public class DishActivity extends AppCompatActivity {
                         TextView priceTV = findViewById(R.id.priceTV);
                         if (position == 0) {
                             priceTV.setText("2.50");
+                            pos = 0;
                         } else if (position == 1) {
                             priceTV.setText("1.70");
+                            pos = 1;
                         } else if (position == 2) {
                             priceTV.setText("1.50");
+                            pos = 2;
                         } else if (position == 3) {
                             priceTV.setText("2.35");
+                            pos = 3;
                         } else if (position == 4) {
                             priceTV.setText("1.50");
+                            pos = 4;
                         } else if (position == 5) {
                             priceTV.setText("8.00");
+                            pos = 5;
                         } else if (position == 6) {
                             priceTV.setText("4.00");
+                            pos = 6;
                         } else if (position == 7) {
                             priceTV.setText("5.25");
+                            pos = 7;
                         } else if (position == 8) {
                             priceTV.setText("12.00");
+                            pos = 8;
                         } else if (position == 9) {
                             priceTV.setText("3.00");
+                            pos = 9;
                         } else if (position == 10) {
                             priceTV.setText("7.50");
+                            pos = 10;
                         } else if (position == 11) {
                             priceTV.setText("9.45");
+                            pos = 11;
                         } else if (position == 12) {
                             priceTV.setText("20.00");
+                            pos = 12;
                         } else if (position == 13) {
                             priceTV.setText("3.75");
+                            pos = 13;
                         }
                     }
 
@@ -92,7 +107,10 @@ public class DishActivity extends AppCompatActivity {
         View.OnClickListener nextListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                DecimalFormat precision = new DecimalFormat("##0.00");
                 Intent nextIntent = new Intent(DishActivity.this, TableActivity.class);
+                nextIntent.putExtra("price", precision.format(total).toString());
+                nextIntent.putExtra("dish", MENU[pos]);
                 startActivity(nextIntent);
             }
         };
