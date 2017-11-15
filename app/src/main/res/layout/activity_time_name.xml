@@ -61,15 +61,14 @@
         app:layout_constraintTop_toBottomOf="@+id/name_et" />
 
     <Button
-        android:id="@+id/name_and_time_next_b"
+        android:id="@+id/confirmation_button"
         android:layout_width="match_parent"
         android:layout_height="94dp"
-        android:layout_marginTop="180dp"
         android:background="@color/colorAccent"
-        android:text="@string/next"
+        android:text="@string/confirmation"
         android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
