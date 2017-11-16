@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * Created by Austin on 11/15/2017.
  */
 
-public class ListAdapter extends ArrayAdapter<String> {
-    private final LayoutInflater inflater;
+public class ListAdapter  {
+  /*  private final LayoutInflater inflater;
     private final ViewBinderHelper binderHelper;
 
     public ListAdapter(Context context, ArrayList<String> items) {
@@ -50,10 +50,10 @@ public class ListAdapter extends ArrayAdapter<String> {
             binderHelper.bind(holder.swipeLayout, item);
 
             holder.name.setText(item);
-            holder.deleteView.setOnClickListener()
+            holder.deleteView.setOnClickListener();
         }
 
 
         return convertView;
-    }
+    } */
 }
