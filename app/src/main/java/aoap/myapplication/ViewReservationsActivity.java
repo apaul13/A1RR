@@ -14,7 +14,6 @@ import android.widget.BaseAdapter;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 
-import java.util.ArrayList;
 
 public class ViewReservationsActivity extends ListActivity {
 
@@ -23,7 +22,11 @@ public class ViewReservationsActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
+        nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
+
         //setContentView(R.layout.name_list);
+
         setListAdapter(new ListAdapter());
 
         //Intent intent =
@@ -77,6 +80,7 @@ public class ViewReservationsActivity extends ListActivity {
                     @Override
                     public void onClick(View v) {
                         nameList.remove(pos);
+                        notifyDataSetChanged();
                     }
                 });
             }
