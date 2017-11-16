@@ -29,19 +29,11 @@ public class ViewReservationsActivity extends ListActivity {
         //Intent intent =
     }
 
-
-
-
-    ///
-
     public class ListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
-        private ViewBinderHelper binderHelper;
 
-       /* public ListAdapter(Context context, ArrayList<String> items) {
-            inflater = LayoutInflater.from(context);
-            binderHelper = new ViewBinderHelper();
-        } */
+        ViewBinderHelper binderHelper = new ViewBinderHelper();
+
 
         public Object getItem(int i) {
             return nameList.get(i);
