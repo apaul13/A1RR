@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
@@ -25,11 +25,25 @@ public class ViewReservationsActivity extends ListActivity {
         nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
         nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
 
-        //setContentView(R.layout.name_list);
+
 
         setListAdapter(new ListAdapter());
 
+        // Button homeButton = findViewById(R.id.home_button);
+
+        View.OnClickListener homeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toHome = new Intent(ViewReservationsActivity.this, MainActivity.class);
+                startActivity(toHome);
+            }
+        };
+
+        // homeButton.setOnClickListener(homeListener);
+
         //Intent intent =
+
+        //setContentView(R.layout.name_list);
     }
 
     public class ListAdapter extends BaseAdapter {
