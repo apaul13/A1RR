@@ -7,7 +7,7 @@
     <com.chauthai.swipereveallayout.SwipeRevealLayout
         android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="40dp"
         app:mode="same_level"
         app:dragEdge="right">
 
