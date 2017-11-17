@@ -15,4 +15,6 @@
     <string name="time">Time:</string>
     <string name="choose_name_time">Enter Name and Time</string>
     <string name="confirmation">Confirm Reservation</string>
+    <string name="delete">Delete</string>
+    <string name="home">Home</string>
 </resources>

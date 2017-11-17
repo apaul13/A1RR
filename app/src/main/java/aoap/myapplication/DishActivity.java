@@ -82,7 +82,7 @@ public class DishActivity extends AppCompatActivity {
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-
+                        //Nothing happens
                     }
                 }
         );

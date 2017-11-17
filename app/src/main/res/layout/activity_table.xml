@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     tools:context="aoap.myapplication.TableActivity">
 
+<<<<<<< HEAD
     <aoap.myapplication.CustomDrawings
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+=======
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="206dp" />
+>>>>>>> e89fbaa02b8e6f48dd50798685433d5a422e80f8
 </android.support.constraint.ConstraintLayout>
