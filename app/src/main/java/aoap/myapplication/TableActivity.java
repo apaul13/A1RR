@@ -33,8 +33,8 @@ public class TableActivity extends AppCompatActivity {
 //        @Override
 //        protected void onDraw(Canvas canvas) {
 //            super.onDraw(canvas);
-//            int x = getWidth();
-//            int y = getHeight();
+//            //int x = getWidth();
+//            //int y = getHeight();
 //            int radius;
 //            radius = 100;
 //            Paint paint = new Paint();
@@ -42,8 +42,8 @@ public class TableActivity extends AppCompatActivity {
 //            paint.setColor(Color.WHITE);
 //            canvas.drawPaint(paint);
 //            paint.setColor(Color.parseColor("#da4747"));
-//            canvas.drawCircle(x/2,y/2,radius,paint);
+//            canvas.drawCircle(0,0,radius,paint);
 //        }
 //    }
 //}
-//
+
