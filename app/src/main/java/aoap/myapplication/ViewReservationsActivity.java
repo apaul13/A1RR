@@ -10,9 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ListView;
 
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 
 
@@ -26,40 +25,18 @@ public class ViewReservationsActivity extends ListActivity {
         nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
         nameList.add(new Reservation("John", "4:00", "Soup", "$3.00", "4"));
 
-
-
         setListAdapter(new ListAdapter());
-
-      //  Log.i("test", "Before Button Initialization");
-
-        LayoutInflater inflater = (LayoutInflater) ViewReservationsActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        ViewGroup parent = findViewById(android.R.id.content);
-        View view = inflater.inflate(R.layout.name_list, parent, false);
-
-        Button homeButton = view.findViewById(R.id.home_button);
-     //   Log.i("test", "After Button Initialization");
-
-        View.OnClickListener homeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent toHome = new Intent(ViewReservationsActivity.this, MainActivity.class);
-                startActivity(toHome);
-            }
-        };
-
-        homeButton.setOnClickListener(homeListener);
 
         Intent intent = getIntent();
         String source = intent.getStringExtra("source");
-        if (source == "mainActivity"){
-
+        if (source.equals("mainActivity")){
+            //nothing happens
         }
         else {
             String name = intent.getStringExtra("name");
             String time = intent.getStringExtra("time");
             String dish = intent.getStringExtra("dish");
-            String price = intent.getStringExtra("table");
+            String price = intent.getStringExtra("price");
             String table = intent.getStringExtra("table");
 
             Reservation newReservation = new Reservation(name, time, dish, price, table);
@@ -70,7 +47,22 @@ public class ViewReservationsActivity extends ListActivity {
         //setContentView(R.layout.name_list);
     }
 
-    public class ListAdapter extends BaseAdapter {
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        Intent toDetails = new Intent(ViewReservationsActivity.this, DetailsActivity.class);
+        final Reservation item = (Reservation) nameList.get(position);
+
+        toDetails.putExtra("name", item.getName());
+        toDetails.putExtra("time", item.getTime());
+        toDetails.putExtra("dish", item.getDish());
+        toDetails.putExtra("price", item.getPrice());
+        toDetails.putExtra("table", item.getTable());
+
+        startActivity(toDetails);
+    }
+
+
+    class ListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
 
         ViewBinderHelper binderHelper = new ViewBinderHelper();
@@ -101,6 +93,7 @@ public class ViewReservationsActivity extends ListActivity {
                 holder.name = convertView.findViewById(R.id.name_tv);
                 holder.deleteView = convertView.findViewById(R.id.delete_button);
                 holder.swipeLayout = convertView.findViewById(R.id.swipe_layout);
+                holder.homeView = convertView.findViewById(R.id.home_button);
 
                 convertView.setTag(holder);
             }
@@ -110,6 +103,7 @@ public class ViewReservationsActivity extends ListActivity {
 
             final Reservation item = (Reservation) nameList.get(position);
             String nameString = item.getName();
+
             if (item != null){
                 binderHelper.bind(holder.swipeLayout, nameString);
 
@@ -121,8 +115,15 @@ public class ViewReservationsActivity extends ListActivity {
                         notifyDataSetChanged();
                     }
                 });
-            }
 
+                holder.homeView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Intent toHome = new Intent(ViewReservationsActivity.this, MainActivity.class);
+                        startActivity(toHome);
+                    }
+                });
+            }
 
             return convertView;
         }
