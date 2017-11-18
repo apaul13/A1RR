@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,21 @@ public class ViewReservationsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
-        nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
+        nameList.add(new Reservation("John", "4:00", "Soup", "$3.00", "4"));
 
 
 
         setListAdapter(new ListAdapter());
 
-        // Button homeButton = findViewById(R.id.home_button);
+      //  Log.i("test", "Before Button Initialization");
+
+        LayoutInflater inflater = (LayoutInflater) ViewReservationsActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        ViewGroup parent = findViewById(android.R.id.content);
+        View view = inflater.inflate(R.layout.name_list, parent, false);
+
+        Button homeButton = view.findViewById(R.id.home_button);
+     //   Log.i("test", "After Button Initialization");
 
         View.OnClickListener homeListener = new View.OnClickListener() {
             @Override
@@ -39,9 +48,17 @@ public class ViewReservationsActivity extends ListActivity {
             }
         };
 
-        // homeButton.setOnClickListener(homeListener);
+        homeButton.setOnClickListener(homeListener);
 
-        //Intent intent =
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        String time = intent.getStringExtra("time");
+        String dish = intent.getStringExtra("dish");
+        String price = intent.getStringExtra("table");
+        String table = intent.getStringExtra("table");
+
+        Reservation newReservation = new Reservation(name, time, dish, price, table);
+        nameList.add(newReservation);
 
         //setContentView(R.layout.name_list);
     }
