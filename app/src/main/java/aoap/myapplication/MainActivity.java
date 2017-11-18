@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent toViewReservationIntent = new Intent(MainActivity.this, ViewReservationsActivity.class);
+                toViewReservationIntent.putExtra("source", "mainActivity");
                 startActivity(toViewReservationIntent);
             }
         };

@@ -26,6 +26,7 @@ public class TimeNameActivity extends AppCompatActivity {
                 Intent toSomePlace = new Intent(TimeNameActivity.this, ViewReservationsActivity.class);
                 toSomePlace.putExtra("name", name_et.getText());
                 toSomePlace.putExtra("time", time_et.getText());
+                toSomePlace.putExtra("source", "timeName");
                 startActivity(toSomePlace);
             }
         };

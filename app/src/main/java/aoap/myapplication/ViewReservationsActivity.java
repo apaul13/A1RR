@@ -51,14 +51,21 @@ public class ViewReservationsActivity extends ListActivity {
         homeButton.setOnClickListener(homeListener);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        String time = intent.getStringExtra("time");
-        String dish = intent.getStringExtra("dish");
-        String price = intent.getStringExtra("table");
-        String table = intent.getStringExtra("table");
+        String source = intent.getStringExtra("source");
+        if (source == "mainActivity"){
 
-        Reservation newReservation = new Reservation(name, time, dish, price, table);
-        nameList.add(newReservation);
+        }
+        else {
+            String name = intent.getStringExtra("name");
+            String time = intent.getStringExtra("time");
+            String dish = intent.getStringExtra("dish");
+            String price = intent.getStringExtra("table");
+            String table = intent.getStringExtra("table");
+
+            Reservation newReservation = new Reservation(name, time, dish, price, table);
+            nameList.add(newReservation);
+
+        }
 
         //setContentView(R.layout.name_list);
     }
