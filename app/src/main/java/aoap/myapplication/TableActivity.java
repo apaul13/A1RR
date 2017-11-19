@@ -7,8 +7,14 @@ import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+
 
 public class TableActivity extends AppCompatActivity {
 
@@ -16,6 +22,14 @@ public class TableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("message");
+
+        myRef.setValue("HOLY cow");
+        Log.i("test", "sent bytes");
+
 
         Button a = findViewById(R.id.b1);
         a.setOnClickListener(new View.OnClickListener(){
