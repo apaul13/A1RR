@@ -17,4 +17,6 @@
     <string name="confirmation">Confirm Reservation</string>
     <string name="delete">Delete</string>
     <string name="home">Home</string>
+    <string name="back">Back</string>
+    <string name="details">Details</string>
 </resources>
