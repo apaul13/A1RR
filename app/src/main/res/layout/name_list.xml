@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:descendantFocusability="blocksDescendants">
 
-                <RelativeLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -29,22 +29,22 @@
                     android:id="@+id/delete_button"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_toRightOf="@id/details_button"
                     android:layout_weight="1"
                     android:background="@android:color/holo_red_light"
                     android:text="@string/delete"
                     android:textColor="@android:color/background_light"
                     tools:layout_editor_absoluteX="487dp"
-                    tools:layout_editor_absoluteY="0dp"
-                    android:layout_toRightOf="@id/details_button"/>
+                    tools:layout_editor_absoluteY="0dp" />
 
-                    <Button
-                        android:id="@+id/details_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="@string/details"
-                        android:textColor="@android:color/background_light" />
+                <Button
+                    android:id="@+id/details_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/details"
+                    android:textColor="@android:color/background_light" />
 
             </RelativeLayout>
         </FrameLayout>
