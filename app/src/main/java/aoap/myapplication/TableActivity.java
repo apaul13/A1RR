@@ -21,12 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 
 
 public class TableActivity extends AppCompatActivity {
-    static Context context;
+    static Context context; //static?
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
-         context = this.getBaseContext();
+        context = this.getBaseContext();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("Tables");
 
@@ -49,25 +49,35 @@ public class TableActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Intent intent = getIntent();
-        Bundle bd = intent.getExtras();
-        Log.i("test", "is null?");
-        if(bd != null)
+        Intent getCustomIntent = getIntent();
+        Bundle bdCustom = getCustomIntent.getExtras();
+
+        Intent getDishIntent = getIntent();
+        Bundle bdDish = getDishIntent.getExtras();
+        final String dish = (String) bdDish.get("dish");
+        final String dishPrice = (String) bdDish.get("dishPrice");
+        Log.i("test","dish: "+dish);
+
+        if(bdCustom != null)
         {
             //String tableConfirmation = (String) bd.get("val");
-            String tableNum = (String) bd.get("tab");
-            new AlertDialog.Builder(this).setMessage("Are you sure you'd like table "+tableNum+"?").setTitle("Confirmation")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-                            //
-                            Intent toViewReservationIntent = new Intent(TableActivity.this, ViewReservationsActivity.class);
-                            toViewReservationIntent.putExtra("source", "mainActivity");
-                            startActivity(toViewReservationIntent);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, null).show();
+            final String tableNum = (String) bdCustom.get("tab");
+            if (tableNum != null) {
+                new AlertDialog.Builder(this).setMessage("Are you sure you'd like table "+tableNum+"?").setTitle("Confirmation")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                                //
+                                Intent toTimeNameIntent = new Intent(TableActivity.this, TimeNameActivity.class);
+                                toTimeNameIntent.putExtra("tab", tableNum);
+                                toTimeNameIntent.putExtra("dish", dish);
+                                toTimeNameIntent.putExtra("dishPrice", dishPrice);
+                                startActivity(toTimeNameIntent);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
             //Log.i("test", "getName.get(val1): "+getName);
         }
 

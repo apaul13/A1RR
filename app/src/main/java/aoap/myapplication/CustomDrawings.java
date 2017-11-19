@@ -15,6 +15,9 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.Paint;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /**
  * Created by artur on 11/15/17.
@@ -28,6 +31,10 @@ public class CustomDrawings extends View {
     Rect r1,r2,r3,r4,r5,r6,r7,r8;
     Context context;
     Intent intent;
+    String tableNum;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference().child("Tables");
+
 
     public CustomDrawings(Context context) {
         super(context);
@@ -67,10 +74,6 @@ public class CustomDrawings extends View {
         paint7.setColor(Color.GREEN);
         paint8.setColor(Color.GREEN);
 
-
-//        for (Paint p: paints) {
-//            p.setColor(Color.GREEN);
-//        }
     }
 
     @Override
@@ -120,6 +123,7 @@ public class CustomDrawings extends View {
             //Log.i("test", "Action up");
             Log.i("test", "touchX: "+touchX+", touchY: "+touchY);
             if (r1.contains(touchX,touchY)) {
+                tableNum = "one";
                 paint1.setColor(paint1.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r2.contains(touchX,touchY)) {
                 paint2.setColor(paint2.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
@@ -141,10 +145,9 @@ public class CustomDrawings extends View {
             //              Intent intent = new Intent(CustomDrawings.this,MainActivity.class)
             context = TableActivity.context;
             intent = new Intent(context, TableActivity.class);
-            intent//.setClassName("aoap.myapplication.CustomDrawings","aoap.myapplications.TableActivity")
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Log.i("test", "intent starting");
-            intent.putExtra("tab", "table one");
+            intent.putExtra("tab", tableNum);
             context.startActivity(intent);
 
             //Intent intent = new Intent(CustomDrawings.this,DishActivity.class);
