@@ -14,4 +14,5 @@ public class ViewHolder {
     Button deleteView;
     SwipeRevealLayout swipeLayout;
     Button homeView;
+    Button detailsView;
 }

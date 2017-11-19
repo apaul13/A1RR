@@ -18,16 +18,25 @@ public class TimeNameActivity extends AppCompatActivity {
         final EditText name_et = findViewById(R.id.name_et);
         final EditText time_et = findViewById(R.id.time_et);
 
+        Intent from = getIntent();
+
+        final String price = from.getStringExtra("price");
+        final String table = from.getStringExtra("table");
+        final String dish = from.getStringExtra("dish");
+
         Button confirm = findViewById(R.id.confirmation_button);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toSomePlace = new Intent(TimeNameActivity.this, ViewReservationsActivity.class);
-                toSomePlace.putExtra("name", name_et.getText().toString());
-                toSomePlace.putExtra("time", time_et.getText().toString());
-                toSomePlace.putExtra("source", "timeName");
-                startActivity(toSomePlace);
+                Intent toViewReservation = new Intent(TimeNameActivity.this, ViewReservationsActivity.class);
+                toViewReservation.putExtra("name", name_et.getText().toString());
+                toViewReservation.putExtra("time", time_et.getText().toString());
+                toViewReservation.putExtra("dish", dish);
+                toViewReservation.putExtra("table", table);
+                toViewReservation.putExtra("price", price);
+                toViewReservation.putExtra("source", "timeName");
+                startActivity(toViewReservation);
             }
         };
         confirm.setOnClickListener(listener);

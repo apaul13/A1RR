@@ -21,7 +21,13 @@ import com.google.firebase.database.DatabaseReference;
 
 
 public class TableActivity extends AppCompatActivity {
+<<<<<<< HEAD
     static Context context; //static?
+=======
+
+    static Context context;
+
+>>>>>>> e51e17069ece2db5e5cf484f1e9971ece8af3be5
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

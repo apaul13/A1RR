@@ -29,10 +29,7 @@ public class ViewReservationsActivity extends ListActivity {
 
         Intent intent = getIntent();
         String source = intent.getStringExtra("source");
-        if (source.equals("mainActivity")){
-            //nothing happens
-        }
-        else {
+        if (source.equals("timeName")){
             String name = intent.getStringExtra("name");
             String time = intent.getStringExtra("time");
             String dish = intent.getStringExtra("dish");
@@ -41,7 +38,9 @@ public class ViewReservationsActivity extends ListActivity {
 
             Reservation newReservation = new Reservation(name, time, dish, price, table);
             nameList.add(newReservation);
-
+        }
+        else {
+            //List is not updated
         }
 
         //setContentView(R.layout.name_list);
@@ -94,6 +93,7 @@ public class ViewReservationsActivity extends ListActivity {
                 holder.deleteView = convertView.findViewById(R.id.delete_button);
                 holder.swipeLayout = convertView.findViewById(R.id.swipe_layout);
                 holder.homeView = convertView.findViewById(R.id.home_button);
+                holder.detailsView = convertView.findViewById(R.id.details_button);
 
                 convertView.setTag(holder);
             }
@@ -103,9 +103,10 @@ public class ViewReservationsActivity extends ListActivity {
 
             final Reservation item = (Reservation) nameList.get(position);
             String nameString = item.getName();
+            String posString = item.toString();
 
             if (item != null){
-                binderHelper.bind(holder.swipeLayout, nameString);
+               binderHelper.bind(holder.swipeLayout, posString);
 
                 holder.name.setText(nameString);
                 holder.deleteView.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +122,22 @@ public class ViewReservationsActivity extends ListActivity {
                     public void onClick(View v) {
                         Intent toHome = new Intent(ViewReservationsActivity.this, MainActivity.class);
                         startActivity(toHome);
+                    }
+                });
+
+                holder.detailsView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        Intent toDetails = new Intent(ViewReservationsActivity.this, DetailsActivity.class);
+                        final Reservation item = (Reservation) nameList.get(pos);
+
+                        toDetails.putExtra("name", item.getName());
+                        toDetails.putExtra("time", item.getTime());
+                        toDetails.putExtra("dish", item.getDish());
+                        toDetails.putExtra("price", item.getPrice());
+                        toDetails.putExtra("table", item.getTable());
+
+                        startActivity(toDetails);
                     }
                 });
             }
