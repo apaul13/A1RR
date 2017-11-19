@@ -14,6 +14,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.Paint;
 import android.widget.Toast;
 
+
 /**
  * Created by artur on 11/15/17.
  */
@@ -75,7 +76,6 @@ public class CustomDrawings extends View {
         width = this.getWidth();
         height = this.getHeight();
 
-
         //left,top,right,bottom
         r1 = new Rect(250,150,550,450); //top left
         canvas.drawRect(r1, paint1);
@@ -109,7 +109,6 @@ public class CustomDrawings extends View {
 
 
     public boolean onTouchEvent(MotionEvent event) {
-        //Log.i("test", "waiting for events!");
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
 
@@ -118,9 +117,7 @@ public class CustomDrawings extends View {
             //Log.i("test", "Action up");
             Log.i("test", "touchX: "+touchX+", touchY: "+touchY);
             if (r1.contains(touchX,touchY)) {
-                Log.i("test", "A1111!");
                 paint1.setColor(paint1.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-                Log.i("test", "invalidated!");
             } else if (r2.contains(touchX,touchY)) {
                 paint2.setColor(paint2.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r3.contains(touchX,touchY)) {
@@ -137,6 +134,7 @@ public class CustomDrawings extends View {
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
             invalidate();
+            Intent intent = new Intent(CustomDrawings.this,DishActivity.class);
         }
         return true;
     }
