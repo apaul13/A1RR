@@ -109,7 +109,7 @@ public class DishActivity extends AppCompatActivity {
             public void onClick(View v){
                 DecimalFormat precision = new DecimalFormat("##0.00");
                 Intent nextIntent = new Intent(DishActivity.this, TableActivity.class);
-                nextIntent.putExtra("price", precision.format(total).toString());
+                nextIntent.putExtra("dishPrice", precision.format(total).toString());
                 nextIntent.putExtra("dish", MENU[pos]);
                 startActivity(nextIntent);
             }
