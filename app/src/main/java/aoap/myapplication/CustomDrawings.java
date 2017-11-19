@@ -1,5 +1,6 @@
 package aoap.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -25,6 +26,8 @@ public class CustomDrawings extends View {
     int width = this.getWidth();
     int height = this.getHeight();
     Rect r1,r2,r3,r4,r5,r6,r7,r8;
+    Context context;
+    Intent intent;
 
     public CustomDrawings(Context context) {
         super(context);
@@ -111,7 +114,7 @@ public class CustomDrawings extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
-
+        this.context=context;
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             //Log.i("test", "Action up");
@@ -134,7 +137,17 @@ public class CustomDrawings extends View {
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
             invalidate();
-            Intent intent = new Intent(CustomDrawings.this,DishActivity.class);
+
+            //              Intent intent = new Intent(CustomDrawings.this,MainActivity.class)
+            context = TableActivity.context;
+            intent = new Intent(context, TableActivity.class);
+            intent//.setClassName("aoap.myapplication.CustomDrawings","aoap.myapplications.TableActivity")
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Log.i("test", "intent starting");
+            intent.putExtra("tab", "table one");
+            context.startActivity(intent);
+
+            //Intent intent = new Intent(CustomDrawings.this,DishActivity.class);
         }
         return true;
     }
