@@ -15,17 +15,18 @@ public class TimeNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_name);
 
-        final EditText name_et = (EditText) findViewById(R.id.name_et);
-        final EditText time_et = (EditText) findViewById(R.id.time_et);
+        final EditText name_et = findViewById(R.id.name_et);
+        final EditText time_et = findViewById(R.id.time_et);
 
-        Button confirm = (Button) findViewById(R.id.confirmation_button);
+        Button confirm = findViewById(R.id.confirmation_button);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent toSomePlace = new Intent(TimeNameActivity.this, ViewReservationsActivity.class);
-                toSomePlace.putExtra("name", name_et.getText());
-                toSomePlace.putExtra("time", time_et.getText());
+                toSomePlace.putExtra("name", name_et.getText().toString());
+                toSomePlace.putExtra("time", time_et.getText().toString());
+                toSomePlace.putExtra("source", "timeName");
                 startActivity(toSomePlace);
             }
         };

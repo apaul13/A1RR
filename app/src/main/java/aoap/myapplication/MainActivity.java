@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener viewReservationListener = new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent toViewReservationIntent = new Intent(MainActivity.this, DishActivity.class);
+                Intent toViewReservationIntent = new Intent(MainActivity.this, ViewReservationsActivity.class);
+                toViewReservationIntent.putExtra("source", "mainActivity");
                 startActivity(toViewReservationIntent);
             }
         };

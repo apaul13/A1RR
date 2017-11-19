@@ -35,7 +35,7 @@ public class TableActivity extends AppCompatActivity {
         a.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(TableActivity.this, ViewReservationsActivity.class);
+                Intent intent = new Intent(TableActivity.this, TimeNameActivity.class);
                 startActivity(intent);
             }
         });
