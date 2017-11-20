@@ -153,7 +153,7 @@ public class CustomDrawings extends View {
             intent = new Intent(context, TableActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Log.i("test", "intent starting");
-            intent.putExtra("tab", tableNum);
+            intent.putExtra("table", tableNum);
 
             context.startActivity(intent);
         }

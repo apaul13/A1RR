@@ -48,12 +48,12 @@ public class TableActivity extends AppCompatActivity {
             }
         });
 
-        Intent getDishIntent = getIntent();
+        /* Intent getDishIntent = getIntent();
         Bundle bdDish = getDishIntent.getExtras();
         //assigned when you come from DishActivity. Declared static and sent to custom class.
         dish = (String) bdDish.get("dish");
         dishPrice = (String) bdDish.get("dishPrice");
-        Log.i("test","dish: "+dish);
+        Log.i("test","dish: "+dish); */
 
         Intent getCustomIntent = getIntent();
         Bundle bdCustom = getCustomIntent.getExtras();
@@ -61,9 +61,9 @@ public class TableActivity extends AppCompatActivity {
         if(bdCustom != null)
         {
             //String tableConfirmation = (String) bd.get("val");
-            final String tableNum = (String) bdCustom.get("tab");
-            final String di = (String) bdCustom.get("dish");
-            final String dipr = (String) bdCustom.get("dishPrice");
+            final String tableNum = (String) bdCustom.get("table");
+         //   final String di = (String) bdCustom.get("dish");
+         //   final String dipr = (String) bdCustom.get("dishPrice");
 
             if (tableNum != null) {
                 new AlertDialog.Builder(this).setMessage("Are you sure you'd like table "+tableNum+"?").setTitle("Confirmation")
@@ -72,12 +72,10 @@ public class TableActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                                 //
-                                Intent toTimeNameIntent = new Intent(TableActivity.this, TimeNameActivity.class);
-                                toTimeNameIntent.putExtra("tab", tableNum);
-                                toTimeNameIntent.putExtra("dish", di);
-                                toTimeNameIntent.putExtra("dishPrice", dipr);
-                                Log.i("Test",""+di);
-                                startActivity(toTimeNameIntent);
+                                Intent toDishIntent = new Intent(TableActivity.this, DishActivity.class);
+                                toDishIntent.putExtra("table", tableNum);
+                                //Log.i("Test",""+di);
+                                startActivity(toDishIntent);
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();

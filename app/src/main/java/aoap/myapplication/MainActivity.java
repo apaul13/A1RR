@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener makeReservationListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent toDishIntent = new Intent(MainActivity.this, DishActivity.class);
+                Intent toDishIntent = new Intent(MainActivity.this, TableActivity.class);
                 startActivity(toDishIntent);
             }
         };
