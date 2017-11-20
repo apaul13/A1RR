@@ -25,8 +25,9 @@ public class DishActivity extends AppCompatActivity {
         Button totalButton = findViewById(R.id.total_button);
         Button nextButton = findViewById(R.id.dish_next_button);
 
-        Intent from = getIntent();
-        final String table = from.getStringExtra("table");
+        Intent getTableIntent = getIntent();
+        Bundle bdTable = getTableIntent.getExtras();
+        final String tableNum = (String) bdTable.get("tab");
 
         final Spinner dishSpinner = findViewById(R.id.dishes_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MENU);
@@ -112,9 +113,9 @@ public class DishActivity extends AppCompatActivity {
             public void onClick(View v){
                 DecimalFormat precision = new DecimalFormat("##0.00");
                 Intent nextIntent = new Intent(DishActivity.this, TimeNameActivity.class);
-                nextIntent.putExtra("price", precision.format(total).toString());
+                nextIntent.putExtra("dishPrice", precision.format(total).toString());
                 nextIntent.putExtra("dish", MENU[pos]);
-                nextIntent.putExtra("table", table);
+                nextIntent.putExtra("tab", tableNum);
                 startActivity(nextIntent);
             }
         };

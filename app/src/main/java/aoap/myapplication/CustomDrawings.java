@@ -122,28 +122,35 @@ public class CustomDrawings extends View {
             //Log.i("test", "Action up");
             //Log.i("test", "touchX: " + touchX + ", touchY: " + touchY);
             if (r1.contains(touchX, touchY)) {
-                tableNum = "one";
+                tableNum = "1";
                 //myRef.child("Table 1").setValue("true");
                 paint1.setColor(paint1.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r2.contains(touchX, touchY)) {
+                tableNum = "2";
                 //myRef.child("Table 2").setValue("true");
                 paint2.setColor(paint2.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r3.contains(touchX, touchY)) {
+                tableNum = "3";
                 //myRef.child("Table 3").setValue("true");
                 paint3.setColor(paint3.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r4.contains(touchX, touchY)) {
+                tableNum = "4";
                 //myRef.child("Table 4").setValue("true");
                 paint4.setColor(paint4.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r5.contains(touchX, touchY)) {
+                tableNum = "5";
                 //myRef.child("Table 5").setValue("true");
                 paint5.setColor(paint5.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r6.contains(touchX, touchY)) {
+                tableNum = "6";
                 //myRef.child("Table 6").setValue("true");
                 paint6.setColor(paint6.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r7.contains(touchX, touchY)) {
+                tableNum = "7";
                 //myRef.child("Table 7").setValue("true");
                 paint7.setColor(paint7.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             } else if (r8.contains(touchX, touchY)) {
+                tableNum = "8";
                 //myRef.child("Table 8").setValue("true");
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
@@ -153,7 +160,7 @@ public class CustomDrawings extends View {
             intent = new Intent(context, TableActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Log.i("test", "intent starting");
-            intent.putExtra("table", tableNum);
+            intent.putExtra("tab", tableNum);
 
             context.startActivity(intent);
         }
