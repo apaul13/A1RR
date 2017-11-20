@@ -42,7 +42,7 @@ public class DetailsActivity extends AppCompatActivity {
         tableTV.setText("Table: " + table);
 
         TextView priceTV = findViewById(R.id.price_details);
-        priceTV.setText("Price: " + price);
+        priceTV.setText("Price: $" + price);
 
         Button toList = findViewById(R.id.toListButton);
         toList.setOnClickListener(new View.OnClickListener(){
