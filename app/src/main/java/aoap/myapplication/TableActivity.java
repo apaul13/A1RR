@@ -17,29 +17,26 @@ import android.app.Activity;
 import android.app.AlertDialog.Builder;
 
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.*;//DatabaseReference;
 
 
 public class TableActivity extends AppCompatActivity {
     static Context context; //static?
-    
+    static String dish;
+    static String dishPrice;
+
+    private FirebaseDatabase theDB;
+    private DatabaseReference dbRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
         context = this.getBaseContext();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("Tables");
 
-        Log.i("test", "sent bytes");
-//        myRef.child("Table 1").setValue("false");
-//        myRef.child("Table 2").setValue("false");
-//        myRef.child("Table 3").setValue("false");
-//        myRef.child("Table 4").setValue("false");
-//        myRef.child("Table 5").setValue("false");
-//        myRef.child("Table 6").setValue("false");
-//        myRef.child("Table 7").setValue("false");
-//        myRef.child("Table 8").setValue("false");
+        theDB = FirebaseDatabase.getInstance();
+        dbRef = theDB.getReference().child("Tables");
+        dbRef.child("Table 9").setValue("hmm");
 
 
         Button a = findViewById(R.id.b1);
@@ -50,19 +47,24 @@ public class TableActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Intent getCustomIntent = getIntent();
-        Bundle bdCustom = getCustomIntent.getExtras();
 
         Intent getDishIntent = getIntent();
         Bundle bdDish = getDishIntent.getExtras();
-        final String dish = (String) bdDish.get("dish");
-        final String dishPrice = (String) bdDish.get("dishPrice");
+        //assigned when you come from DishActivity. Declared static and sent to custom class.
+        dish = (String) bdDish.get("dish");
+        dishPrice = (String) bdDish.get("dishPrice");
         Log.i("test","dish: "+dish);
+
+        Intent getCustomIntent = getIntent();
+        Bundle bdCustom = getCustomIntent.getExtras();
 
         if(bdCustom != null)
         {
             //String tableConfirmation = (String) bd.get("val");
             final String tableNum = (String) bdCustom.get("tab");
+            final String di = (String) bdCustom.get("dish");
+            final String dipr = (String) bdCustom.get("dishPrice");
+
             if (tableNum != null) {
                 new AlertDialog.Builder(this).setMessage("Are you sure you'd like table "+tableNum+"?").setTitle("Confirmation")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -72,45 +74,15 @@ public class TableActivity extends AppCompatActivity {
                                 //
                                 Intent toTimeNameIntent = new Intent(TableActivity.this, TimeNameActivity.class);
                                 toTimeNameIntent.putExtra("tab", tableNum);
-                                toTimeNameIntent.putExtra("dish", dish);
-                                toTimeNameIntent.putExtra("dishPrice", dishPrice);
+                                toTimeNameIntent.putExtra("dish", di);
+                                toTimeNameIntent.putExtra("dishPrice", dipr);
+                                Log.i("Test",""+di);
                                 startActivity(toTimeNameIntent);
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();
             }
-            //Log.i("test", "getName.get(val1): "+getName);
         }
-
     }
-
 }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(new MyView(this));
-//    }
-//
-//    public class MyView extends View {
-//        public MyView(Context context) {
-//            super(context);
-//        }
-//
-//        @Override
-//        protected void onDraw(Canvas canvas) {
-//            super.onDraw(canvas);
-//            //int x = getWidth();
-//            //int y = getHeight();
-//            int radius;
-//            radius = 100;
-//            Paint paint = new Paint();
-//            paint.setStyle(Paint.Style.FILL);
-//            paint.setColor(Color.WHITE);
-//            canvas.drawPaint(paint);
-//            paint.setColor(Color.parseColor("#da4747"));
-//            canvas.drawCircle(0,0,radius,paint);
-//        }
-//    }
-//}
 

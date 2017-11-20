@@ -15,8 +15,15 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.Paint;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -24,16 +31,14 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class CustomDrawings extends View {
-    Paint paint1,paint2, paint3, paint4, paint5, paint6, paint7, paint8;
-    Paint[] paints = {paint1,paint2, paint3, paint4, paint5, paint6, paint7, paint8};
+    Paint paint1, paint2, paint3, paint4, paint5, paint6, paint7, paint8;
+    Paint[] paints = {paint1, paint2, paint3, paint4, paint5, paint6, paint7, paint8};
     int width = this.getWidth();
     int height = this.getHeight();
-    Rect r1,r2,r3,r4,r5,r6,r7,r8;
+    Rect r1, r2, r3, r4, r5, r6, r7, r8;
     Context context;
     Intent intent;
     String tableNum;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference().child("Tables");
 
 
     public CustomDrawings(Context context) {
@@ -57,6 +62,14 @@ public class CustomDrawings extends View {
     }
 
     public void init(@Nullable AttributeSet set) {
+
+//                Log.i("test", "test1");
+//                Map<String,String> tableMap = dataSnapshot.getValue(HashMap.class);
+//                Log.i("test", "DATASNAPSHOT: "+tableMap.get("Table1"));
+//                //Log.d("test", "datasnapshot: " + dataSnapshot.getValue(String.class));
+
+        Log.i("test", "test");
+
         paint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint3 = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -73,7 +86,6 @@ public class CustomDrawings extends View {
         paint6.setColor(Color.GREEN);
         paint7.setColor(Color.GREEN);
         paint8.setColor(Color.GREEN);
-
     }
 
     @Override
@@ -83,105 +95,68 @@ public class CustomDrawings extends View {
         height = this.getHeight();
 
         //left,top,right,bottom
-        r1 = new Rect(250,150,550,450); //top left
+        r1 = new Rect(250, 150, 550, 450); //top left
         canvas.drawRect(r1, paint1);
-        r2 = new Rect(width-550,height-450,width-250,height-150); //bottom right
+        r2 = new Rect(width - 550, height - 450, width - 250, height - 150); //bottom right
         canvas.drawRect(r2, paint2);
-        r3 = new Rect(250,height-450,550,height-150); //bottom left
+        r3 = new Rect(250, height - 450, 550, height - 150); //bottom left
         canvas.drawRect(r3, paint3);
-        r4= new Rect(width-550,150,width-250,450); //top right
+        r4 = new Rect(width - 550, 150, width - 250, 450); //top right
         canvas.drawRect(r4, paint4);
-        r5= new Rect(width-550,650,width-250,950); //2nd column, 2nd row
+        r5 = new Rect(width - 550, 650, width - 250, 950); //2nd column, 2nd row
         canvas.drawRect(r5, paint5);
-        r6= new Rect(250,650,550,950); //1st column, 2nd row
+        r6 = new Rect(250, 650, 550, 950); //1st column, 2nd row
         canvas.drawRect(r6, paint6);
-        r7= new Rect(250,height-950,550,height-650); //1st column, 3rd row
+        r7 = new Rect(250, height - 950, 550, height - 650); //1st column, 3rd row
         canvas.drawRect(r7, paint7);
-        r8= new Rect(width-550,height-950,width-250,height-650); //1st column, 2nd row
+        r8 = new Rect(width - 550, height - 950, width - 250, height - 650); //1st column, 2nd row
         canvas.drawRect(r8, paint8);
-
-        //TODO: figure out floats so coords aren't hard coded. doubles DON'T work
-        //bottom 4
-//        canvas.drawCircle(width - 400, height - 300, 150, paint); //bottom right
-//        canvas.drawCircle(400, this.getHeight() - 300, 150, paint); //bottom left
-//        canvas.drawCircle(this.getWidth() - 400, this.getHeight() - 800, 150, paint); //right
-//        canvas.drawCircle(400, this.getHeight() - 800, 150, paint); //left
-//        //top 4
-//        canvas.drawCircle(this.getWidth() - 400, 300, 150, paint); //top right
-//        canvas.drawCircle(400, 300, 150, paint); //top left
-//        canvas.drawCircle(this.getWidth() - 400, 800, 150, paint); //right
-//        canvas.drawCircle(400, 800, 150, paint); //left
     }
 
 
     public boolean onTouchEvent(MotionEvent event) {
         int touchX = (int) event.getX();
         int touchY = (int) event.getY();
-        this.context=context;
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             //Log.i("test", "Action up");
-            Log.i("test", "touchX: "+touchX+", touchY: "+touchY);
-            if (r1.contains(touchX,touchY)) {
+            //Log.i("test", "touchX: " + touchX + ", touchY: " + touchY);
+            if (r1.contains(touchX, touchY)) {
                 tableNum = "one";
+                //myRef.child("Table 1").setValue("true");
                 paint1.setColor(paint1.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r2.contains(touchX,touchY)) {
+            } else if (r2.contains(touchX, touchY)) {
+                //myRef.child("Table 2").setValue("true");
                 paint2.setColor(paint2.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r3.contains(touchX,touchY)) {
+            } else if (r3.contains(touchX, touchY)) {
+                //myRef.child("Table 3").setValue("true");
                 paint3.setColor(paint3.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r4.contains(touchX,touchY)) {
+            } else if (r4.contains(touchX, touchY)) {
+                //myRef.child("Table 4").setValue("true");
                 paint4.setColor(paint4.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r5.contains(touchX,touchY)) {
+            } else if (r5.contains(touchX, touchY)) {
+                //myRef.child("Table 5").setValue("true");
                 paint5.setColor(paint5.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r6.contains(touchX,touchY)) {
+            } else if (r6.contains(touchX, touchY)) {
+                //myRef.child("Table 6").setValue("true");
                 paint6.setColor(paint6.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r7.contains(touchX,touchY)) {
+            } else if (r7.contains(touchX, touchY)) {
+                //myRef.child("Table 7").setValue("true");
                 paint7.setColor(paint7.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
-            } else if (r8.contains(touchX,touchY)) {
+            } else if (r8.contains(touchX, touchY)) {
+                //myRef.child("Table 8").setValue("true");
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
             invalidate();
 
-            //              Intent intent = new Intent(CustomDrawings.this,MainActivity.class)
             context = TableActivity.context;
             intent = new Intent(context, TableActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             Log.i("test", "intent starting");
             intent.putExtra("tab", tableNum);
-            context.startActivity(intent);
 
-            //Intent intent = new Intent(CustomDrawings.this,DishActivity.class);
+            context.startActivity(intent);
         }
         return true;
     }
-
-
-//    public boolean onTouchEvent(MotionEvent event) {
-//        //Log.i("test", "waiting for events!");
-//        int touchX = (int) event.getX();
-//        int touchY = (int) event.getY();
-//
-//        if (event.getAction() == MotionEvent.ACTION_UP) {
-//            //Log.i("test", "Action up");
-//            Log.i("test", "height: "+height+", width: "+width);
-//            Log.i("test", "TouchX: "+touchX+", TouchY: "+touchY+", equationL: "
-//                    +(Math.pow((touchX - width+400),2) + Math.pow((touchY - height+300),2))
-//                    +", equationR: "+(22500));
-//            if (    //if the click was in a circle
-//                    //bottom 4
-//                    (Math.pow(touchX - width+400,2) + Math.pow(touchY - height+300,2))  < (22500) ||
-//                    (Math.pow(touchX - 400,2) + Math.pow(touchY - height+300,2))  < (22500) ||
-//                    (Math.pow(touchX - width + 400,2) + Math.pow(touchY - height + 800,2))  < (22500) ||
-//                    (Math.pow(touchX - 400,2) + Math.pow(touchY - height + 800,2))  < (22500) ||
-//                    //top 4
-//                    (Math.pow(touchX - width + 400,2) + Math.pow(touchY - 300,2))  < (22500) ||
-//                    (Math.pow(touchX - 400,2) + Math.pow(touchY - 300,2))  < (22500) ||
-//                    (Math.pow(touchX - width + 400,2) + Math.pow(touchY - 800,2)) < (22500) ||
-//                    (Math.pow(touchX - 400,2) + Math.pow(touchY - 800,2))  < (22500))
-//            {
-//                Log.i("test", "A TABLE WAS CLICKED!");
-//            }
-//        }
-//        return true;
-//    }
 }
