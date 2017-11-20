@@ -61,7 +61,7 @@ public class TableActivity extends AppCompatActivity {
         if(bdCustom != null)
         {
             //String tableConfirmation = (String) bd.get("val");
-            final String tableNum = (String) bdCustom.get("table");
+            final String tableNum = (String) bdCustom.get("tab");
          //   final String di = (String) bdCustom.get("dish");
          //   final String dipr = (String) bdCustom.get("dishPrice");
 
@@ -73,7 +73,7 @@ public class TableActivity extends AppCompatActivity {
                                 Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                                 //
                                 Intent toDishIntent = new Intent(TableActivity.this, DishActivity.class);
-                                toDishIntent.putExtra("table", tableNum);
+                                toDishIntent.putExtra("tab", tableNum);
                                 //Log.i("Test",""+di);
                                 startActivity(toDishIntent);
                             }
