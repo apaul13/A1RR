@@ -36,7 +36,7 @@ public class TableActivity extends AppCompatActivity {
 
         theDB = FirebaseDatabase.getInstance();
         dbRef = theDB.getReference().child("Tables");
-        dbRef.child("Table 99").setValue("hmm");
+        dbRef.child("Table 9").setValue("hm234234om");
 
 
         Button a = findViewById(R.id.b1);
