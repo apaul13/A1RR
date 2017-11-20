@@ -22,8 +22,6 @@ public class ViewReservationsActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        nameList.add(new Reservation("Kim", "4:00", "Soup", "$3.00", "4"));
-        nameList.add(new Reservation("John", "4:00", "Soup", "$3.00", "4"));
 
         setListAdapter(new ListAdapter());
 
