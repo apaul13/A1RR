@@ -50,7 +50,7 @@ public class TableActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(TableActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                                 //
                                 Intent toDishIntent = new Intent(TableActivity.this, DishActivity.class);
                                 toDishIntent.putExtra("tab", tableNum);
