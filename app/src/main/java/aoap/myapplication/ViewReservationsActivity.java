@@ -44,7 +44,7 @@ public class ViewReservationsActivity extends ListActivity {
         //setContentView(R.layout.name_list);
     }
 
-    @Override
+  /*  @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Intent toDetails = new Intent(ViewReservationsActivity.this, DetailsActivity.class);
         final Reservation item = (Reservation) nameList.get(position);
@@ -56,7 +56,7 @@ public class ViewReservationsActivity extends ListActivity {
         toDetails.putExtra("table", item.getTable());
 
         startActivity(toDetails);
-    }
+    } */
 
 
     class ListAdapter extends BaseAdapter {
