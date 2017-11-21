@@ -116,13 +116,13 @@ public class CustomDrawings extends View {
         canvas.drawRect(r7, paint7);
         r2 = new Rect(width - 550, 150, width - 250, 450); //top right
         canvas.drawRect(r2, paint2);
-        r4 = new Rect(width - 550, 650, width - 250, 950); //2nd column, 2nd row
+        r4 = new Rect(width - 550, 625, width - 250, 925); //2nd column, 2nd row
         canvas.drawRect(r4, paint4);
-        r3 = new Rect(250, 650, 550, 950); //1st column, 2nd row
+        r3 = new Rect(250, 625, 550, 925); //1st column, 2nd row
         canvas.drawRect(r3, paint3);
-        r5 = new Rect(250, height - 950, 550, height - 650); //1st column, 3rd row
+        r5 = new Rect(250, height - 900, 550, height - 600); //1st column, 3rd row
         canvas.drawRect(r5, paint5);
-        r6 = new Rect(width - 550, height - 950, width - 250, height - 650); //1st column, 2nd row
+        r6 = new Rect(width - 550, height - 900, width - 250, height - 600); //1st column, 2nd row
         canvas.drawRect(r6, paint6);
     }
 
@@ -168,7 +168,7 @@ public class CustomDrawings extends View {
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
             invalidate();
-            
+
             context = TableActivity.context;
             intent = new Intent(context, TableActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
