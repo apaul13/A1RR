@@ -20,6 +20,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //Create textViews, and then update them based on the reservation picked
         Intent getViewResIntent = getIntent();
         Bundle bdViewRes = getViewResIntent.getExtras();
         final String tableNum = (String) bdViewRes.get("tab");
@@ -43,6 +44,7 @@ public class DetailsActivity extends AppCompatActivity {
         TextView priceTV = findViewById(R.id.price_details);
         priceTV.setText("Price: $" + dishPrice);
 
+        //Back button & listener
         Button toList = findViewById(R.id.toListButton);
         toList.setOnClickListener(new View.OnClickListener(){
             @Override

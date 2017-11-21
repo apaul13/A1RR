@@ -4,6 +4,7 @@ package aoap.myapplication;
  * Created by Austin on 11/13/2017.
  */
 
+//Reservation class with basic methods to receive data
 public class Reservation {
     private String name;
     private String time;
