@@ -29,7 +29,9 @@ public class DishActivity extends AppCompatActivity {
         Intent getTableIntent = getIntent();
         Bundle bdTable = getTableIntent.getExtras();
         final String tableNum = (String) bdTable.get("tab");
-        Log.d("test", "DISH, TABLE#: "+tableNum);
+        //Log.d("test", "DISH, TABLE#: "+tableNum);
+
+        //Spinner initiation and functionality
         final Spinner dishSpinner = findViewById(R.id.dishes_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MENU);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -37,6 +39,7 @@ public class DishActivity extends AppCompatActivity {
         dishSpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
 
+                    //Updates the price based on the item selected
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                         TextView priceTV = findViewById(R.id.priceTV);
@@ -92,6 +95,7 @@ public class DishActivity extends AppCompatActivity {
                 }
         );
 
+        //Total button listener
 
         View.OnClickListener totalListener = new View.OnClickListener(){
             @Override
@@ -125,6 +129,7 @@ public class DishActivity extends AppCompatActivity {
         nextButton.setOnClickListener(nextListener);
     }
 
+    //Menu of items
     private static String[] MENU = new String[] {
             "Cheese Burger", "Fries", "Sodey Pop", "Chicken Nuggets", "Chocolate Milk", "Yummy Kalamari",
             "Orange Chicken", "Ghost Pepper Burrito", "Lobster", "Burnt Toast", "Beer", "Pizza", "Filet Mignon", "Salad"

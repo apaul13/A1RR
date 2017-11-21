@@ -46,21 +46,8 @@ public class ViewReservationsActivity extends ListActivity {
         //setContentView(R.layout.name_list);
     }
 
-  /*  @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        Intent toDetails = new Intent(ViewReservationsActivity.this, DetailsActivity.class);
-        final Reservation item = (Reservation) nameList.get(position);
 
-        toDetails.putExtra("tab", item.getTable());
-        toDetails.putExtra("name", item.getName());
-        toDetails.putExtra("time", item.getTime());
-        toDetails.putExtra("dish", item.getDish());
-        toDetails.putExtra("dishPrice", item.getPrice());
-
-        startActivity(toDetails);
-    } */
-
-
+    //ListAdapter class that includes SwipeRevealLayout API functionality
     class ListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
 
@@ -105,25 +92,30 @@ public class ViewReservationsActivity extends ListActivity {
             String posString = item.toString();
 
             if (item != null){
+                //bind the swipeLayout with the position of the item being swiped
                binderHelper.bind(holder.swipeLayout, posString);
 
                 holder.name.setText(nameString);
+
+                //delete reservation
                 holder.deleteView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         nameList.remove(pos);
-                        notifyDataSetChanged();
+                        notifyDataSetChanged(); //let the list know that it has been updated
                     }
                 });
 
+                //go back to MainActivity
                 holder.homeView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         Intent toHome = new Intent(ViewReservationsActivity.this, MainActivity.class);
-                        startActivity(toHome);
+                        startActivity(toHome); //
                     }
                 });
 
+                //get details of the reservation
                 holder.detailsView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
