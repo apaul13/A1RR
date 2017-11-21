@@ -36,34 +36,14 @@ public class TableActivity extends AppCompatActivity {
 
         theDB = FirebaseDatabase.getInstance();
         dbRef = theDB.getReference().child("Tables");
-        dbRef.child("Table 9").setValue("hm234234om");
 
-
-        Button a = findViewById(R.id.b1);
-        a.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(TableActivity.this, TimeNameActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /* Intent getDishIntent = getIntent();
-        Bundle bdDish = getDishIntent.getExtras();
-        //assigned when you come from DishActivity. Declared static and sent to custom class.
-        dish = (String) bdDish.get("dish");
-        dishPrice = (String) bdDish.get("dishPrice");
-        Log.i("test","dish: "+dish); */
 
         Intent getCustomIntent = getIntent();
         Bundle bdCustom = getCustomIntent.getExtras();
 
         if(bdCustom != null)
         {
-            //String tableConfirmation = (String) bd.get("val");
             final String tableNum = (String) bdCustom.get("tab");
-         //   final String di = (String) bdCustom.get("dish");
-         //   final String dipr = (String) bdCustom.get("dishPrice");
 
             if (tableNum != null) {
                 new AlertDialog.Builder(this).setMessage("Are you sure you'd like table "+tableNum+"?").setTitle("Confirmation")
@@ -74,7 +54,6 @@ public class TableActivity extends AppCompatActivity {
                                 //
                                 Intent toDishIntent = new Intent(TableActivity.this, DishActivity.class);
                                 toDishIntent.putExtra("tab", tableNum);
-                                //Log.i("Test",""+di);
                                 startActivity(toDishIntent);
                             }
                         })

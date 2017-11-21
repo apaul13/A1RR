@@ -39,7 +39,7 @@ public class CustomDrawings extends View {
     Context context;
     Intent intent;
     String tableNum;
-
+    private int c1 = Color.GREEN;
 
     public CustomDrawings(Context context) {
         super(context);
@@ -62,13 +62,26 @@ public class CustomDrawings extends View {
     }
 
     public void init(@Nullable AttributeSet set) {
+        FirebaseDatabase theDB;
+        DatabaseReference dbRef;
+        theDB = FirebaseDatabase.getInstance();
+        dbRef = theDB.getReference().child("Tables");
+        final int c2=Color.GREEN,c3=Color.GREEN,c4=Color.GREEN,c5=Color.GREEN,c6=Color.GREEN,c7=Color.GREEN,c8=Color.GREEN;
 
-//                Log.i("test", "test1");
-//                Map<String,String> tableMap = dataSnapshot.getValue(HashMap.class);
-//                Log.i("test", "DATASNAPSHOT: "+tableMap.get("Table1"));
-//                //Log.d("test", "datasnapshot: " + dataSnapshot.getValue(String.class));
 
-        Log.i("test", "test");
+
+        dbRef.addValueEventListener(new ValueEventListener() { //attach listener
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
+                Map<String,String> tableMap = (Map<String,String>) dataSnapshot.getValue();
+                Log.i("test", "DATASNAPSHOT: "+tableMap.get("Table 1"));
+                c1 = Color.RED;
+                invalidate();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
         paint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -78,14 +91,14 @@ public class CustomDrawings extends View {
         paint6 = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint7 = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint8 = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint1.setColor(Color.GREEN);
-        paint2.setColor(Color.GREEN);
-        paint3.setColor(Color.GREEN);
-        paint4.setColor(Color.GREEN);
-        paint5.setColor(Color.GREEN);
-        paint6.setColor(Color.GREEN);
-        paint7.setColor(Color.GREEN);
-        paint8.setColor(Color.GREEN);
+        paint1.setColor(c1);
+        paint2.setColor(c2);
+        paint3.setColor(c3);
+        paint4.setColor(c4);
+        paint5.setColor(c5);
+        paint6.setColor(c6);
+        paint7.setColor(c7);
+        paint8.setColor(c8);
     }
 
     @Override
@@ -97,20 +110,20 @@ public class CustomDrawings extends View {
         //left,top,right,bottom
         r1 = new Rect(250, 150, 550, 450); //top left
         canvas.drawRect(r1, paint1);
-        r2 = new Rect(width - 550, height - 450, width - 250, height - 150); //bottom right
-        canvas.drawRect(r2, paint2);
-        r3 = new Rect(250, height - 450, 550, height - 150); //bottom left
-        canvas.drawRect(r3, paint3);
-        r4 = new Rect(width - 550, 150, width - 250, 450); //top right
-        canvas.drawRect(r4, paint4);
-        r5 = new Rect(width - 550, 650, width - 250, 950); //2nd column, 2nd row
-        canvas.drawRect(r5, paint5);
-        r6 = new Rect(250, 650, 550, 950); //1st column, 2nd row
-        canvas.drawRect(r6, paint6);
-        r7 = new Rect(250, height - 950, 550, height - 650); //1st column, 3rd row
-        canvas.drawRect(r7, paint7);
-        r8 = new Rect(width - 550, height - 950, width - 250, height - 650); //1st column, 2nd row
+        r8 = new Rect(width - 550, height - 450, width - 250, height - 150); //bottom right
         canvas.drawRect(r8, paint8);
+        r7 = new Rect(250, height - 450, 550, height - 150); //bottom left
+        canvas.drawRect(r7, paint7);
+        r2 = new Rect(width - 550, 150, width - 250, 450); //top right
+        canvas.drawRect(r2, paint2);
+        r4 = new Rect(width - 550, 650, width - 250, 950); //2nd column, 2nd row
+        canvas.drawRect(r4, paint4);
+        r3 = new Rect(250, 650, 550, 950); //1st column, 2nd row
+        canvas.drawRect(r3, paint3);
+        r5 = new Rect(250, height - 950, 550, height - 650); //1st column, 3rd row
+        canvas.drawRect(r5, paint5);
+        r6 = new Rect(width - 550, height - 950, width - 250, height - 650); //1st column, 2nd row
+        canvas.drawRect(r6, paint6);
     }
 
 
@@ -155,7 +168,7 @@ public class CustomDrawings extends View {
                 paint8.setColor(paint8.getColor() == Color.GREEN ? Color.WHITE : Color.GREEN);
             }
             invalidate();
-
+            
             context = TableActivity.context;
             intent = new Intent(context, TableActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

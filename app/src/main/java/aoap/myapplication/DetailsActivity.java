@@ -2,6 +2,7 @@ package aoap.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,21 +14,19 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Intent from = getIntent();
-
-        String name = from.getStringExtra("name");
-        String dish = from.getStringExtra("dish");
-        String time = from.getStringExtra("time");
-        String table = from.getStringExtra("table");
-        String price = from.getStringExtra("price");
+        Intent getViewResIntent = getIntent();
+        Bundle bdViewRes = getViewResIntent.getExtras();
+        final String tableNum = (String) bdViewRes.get("tab");
+        final String dish = (String) bdViewRes.get("dish");
+        final String dishPrice = (String) bdViewRes.get("dishPrice");
+        final String name = (String) bdViewRes.get("name");
+        final String time = (String) bdViewRes.get("time");
 
         TextView nameTV = findViewById(R.id.name_details);
         nameTV.setText("Name: " + name);
@@ -39,10 +38,10 @@ public class DetailsActivity extends AppCompatActivity {
         timeTV.setText("Time: " + time);
 
         TextView tableTV = findViewById(R.id.table_details);
-        tableTV.setText("Table: " + table);
+        tableTV.setText("Table: " + tableNum);
 
         TextView priceTV = findViewById(R.id.price_details);
-        priceTV.setText("Price: $" + price);
+        priceTV.setText("Price: $" + dishPrice);
 
         Button toList = findViewById(R.id.toListButton);
         toList.setOnClickListener(new View.OnClickListener(){

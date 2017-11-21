@@ -25,16 +25,18 @@ public class ViewReservationsActivity extends ListActivity {
 
         setListAdapter(new ListAdapter());
 
-        Intent intent = getIntent();
-        String source = intent.getStringExtra("source");
+        Intent getTimeNameIntent = getIntent();
+        Bundle bdTimeName = getTimeNameIntent.getExtras();
+        String source = (String) bdTimeName.get("source");
         if (source.equals("timeName")){
-            String name = intent.getStringExtra("name");
-            String time = intent.getStringExtra("time");
-            String dish = intent.getStringExtra("dish");
-            String price = intent.getStringExtra("price");
-            String table = intent.getStringExtra("table");
 
-            Reservation newReservation = new Reservation(name, time, dish, price, table);
+            final String tableNum = (String) bdTimeName.get("tab");
+            final String dish = (String) bdTimeName.get("dish");
+            final String dishPrice = (String) bdTimeName.get("dishPrice");
+            final String name = (String) bdTimeName.get("name");
+            final String time = (String) bdTimeName.get("time");
+
+            Reservation newReservation = new Reservation(name, time, dish, dishPrice, tableNum);
             nameList.add(newReservation);
         }
         else {
@@ -49,11 +51,11 @@ public class ViewReservationsActivity extends ListActivity {
         Intent toDetails = new Intent(ViewReservationsActivity.this, DetailsActivity.class);
         final Reservation item = (Reservation) nameList.get(position);
 
+        toDetails.putExtra("tab", item.getTable());
         toDetails.putExtra("name", item.getName());
         toDetails.putExtra("time", item.getTime());
         toDetails.putExtra("dish", item.getDish());
-        toDetails.putExtra("price", item.getPrice());
-        toDetails.putExtra("table", item.getTable());
+        toDetails.putExtra("dishPrice", item.getPrice());
 
         startActivity(toDetails);
     }
@@ -94,8 +96,7 @@ public class ViewReservationsActivity extends ListActivity {
                 holder.detailsView = convertView.findViewById(R.id.details_button);
 
                 convertView.setTag(holder);
-            }
-            else {
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
@@ -132,14 +133,13 @@ public class ViewReservationsActivity extends ListActivity {
                         toDetails.putExtra("name", item.getName());
                         toDetails.putExtra("time", item.getTime());
                         toDetails.putExtra("dish", item.getDish());
-                        toDetails.putExtra("price", item.getPrice());
-                        toDetails.putExtra("table", item.getTable());
+                        toDetails.putExtra("dishPrice", item.getPrice());
+                        toDetails.putExtra("tab", item.getTable());
 
                         startActivity(toDetails);
                     }
                 });
             }
-
             return convertView;
         }
     }
