@@ -3,6 +3,7 @@ package aoap.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,7 +29,7 @@ public class DishActivity extends AppCompatActivity {
         Intent getTableIntent = getIntent();
         Bundle bdTable = getTableIntent.getExtras();
         final String tableNum = (String) bdTable.get("tab");
-
+        Log.d("test", "DISH, TABLE#: "+tableNum);
         final Spinner dishSpinner = findViewById(R.id.dishes_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, MENU);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,7 +114,7 @@ public class DishActivity extends AppCompatActivity {
             public void onClick(View v){
                 DecimalFormat precision = new DecimalFormat("##0.00");
                 Intent nextIntent = new Intent(DishActivity.this, TimeNameActivity.class);
-                nextIntent.putExtra("price", precision.format(total).toString());
+                nextIntent.putExtra("dishPrice", precision.format(total).toString());
                 nextIntent.putExtra("dish", MENU[pos]);
                 nextIntent.putExtra("tab", tableNum);
                 startActivity(nextIntent);
